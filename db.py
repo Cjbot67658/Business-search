@@ -7,7 +7,7 @@ from datetime import datetime
 
 # Read env here to avoid circular imports
 DATABASE_URL = os.getenv("DATABASE_URL")
-DATABASE_NAME = os.getenv("DATABASE_NAME")  # optional fallback name
+DATABASE_NAME = os.getenv("Cluster0")  # optional fallback name
 SESSION_TTL_SECONDS = int(os.getenv("SESSION_TTL_SECONDS", str(60 * 5)))
 
 if not DATABASE_URL:
