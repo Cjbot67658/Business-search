@@ -1,0 +1,6 @@
+pyrogram==2.* 
+tgcrypto
+aiohttp
+pyromod
+pymongo
+dnspython
