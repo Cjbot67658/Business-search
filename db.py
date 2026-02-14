@@ -81,3 +81,50 @@ def get_episodes_for_story(vision_id: str, min_ep: int = None, max_ep: int = Non
 def forward_to_admins(payload):
     # store an audit copy
     db["forwards"].insert_one({"payload": payload, "forwarded_at": datetime.utcnow()})
+# db.py
+from pymongo import MongoClient, ASCENDING, TEXT
+from pymongo.errors import ConfigurationError
+from urllib.parse import urlparse
+from config import DATABASE_URL, DATABASE_NAME, SESSION_TTL_SECONDS
+from datetime import datetime
+
+client = MongoClient(DATABASE_URL)
+
+# Try to get default DB from URI first; if not present, use DATABASE_NAME env var.
+def _get_database():
+    try:
+        db = client.get_default_database()
+        # get_default_database succeeded only if URI included a database name
+        return db
+    except ConfigurationError:
+        if DATABASE_NAME:
+            return client[DATABASE_NAME]
+        # As a last-ditch attempt, try to parse path segment from URL
+        parsed = urlparse(DATABASE_URL)
+        # parsed.path like '/dbname'
+        if parsed.path and len(parsed.path) > 1:
+            return client[parsed.path.lstrip("/")]
+        raise RuntimeError(
+            "No default database specified. Set DATABASE_URL with a database name "
+            "or set DATABASE_NAME environment variable."
+        )
+
+db = _get_database()
+
+# Collections
+stories = db["stories"]
+episodes = db["episodes"]
+categories = db["categories"]
+sessions = db["sessions"]
+users = db["users"]
+
+def ensure_indexes():
+    stories.create_index([("title", TEXT), ("description", TEXT)], name="text_title_description", default_language="english")
+    categories.create_index([("name", ASCENDING)], unique=True)
+    episodes.create_index([("story_id", ASCENDING), ("episode_number", ASCENDING)], unique=True)
+    sessions.create_index([("created_at", ASCENDING)], expireAfterSeconds=SESSION_TTL_SECONDS)
+    stories.create_index([("vision_id", ASCENDING)], unique=True)
+
+ensure_indexes()
+
+# helper functions...
