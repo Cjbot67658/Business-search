@@ -1,6 +1,4 @@
-pyrogram==2.* 
+pyrogram
 tgcrypto
-aiohttp
-pyromod
 pymongo
 dnspython
