@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 app = Client("story_bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 
 # Register handlers
-@app.on_message(filters.private & filters.chat_type.private)
+@app.on_message(filters.private)
 async def _on_message(client, message):
     await handlers.on_message(client, message)
 
