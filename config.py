@@ -10,17 +10,17 @@ def _env(key: str, required: bool = True, default: str = None) -> str:
         raise ConfigError(f"Environment variable {key} is required.")
     return val
 
-API_ID = int(_env("API_ID"))
-API_HASH = _env("API_HASH")
-BOT_TOKEN = _env("BOT_TOKEN")
-DATABASE_URL = _env("DATABASE_URL")  # e.g. mongodb+srv://...
-DATABASE_NAME = _env("DATABASE_NAME", required=False, default=None)
-CHANNEL_ID = int(_env("CHANNEL_ID"))  # private channel where files are uploaded
-ADMIN_IDS = [int(x.strip()) for x in _env("ADMIN_IDS", required=False, default="").split(",") if x.strip()]  # comma separated ids
+API_ID = int(_env("27857521"))
+API_HASH = _env("627b314d25c83e2c9a1a99db9ae0a3ef")
+BOT_TOKEN = _env("8317617574:AAGIWs5ZtAQSrrvBBtOZ6fPgE6Ez2NWpBpk")
+DATABASE_URL = _env("mongodb+srv://Profiledata:dhbh5fgnnk8ygvhnj7@cluster0.ahxpzci.mongodb.net/?appName=Cluster0")  # e.g. mongodb+srv://...
+DATABASE_NAME = _env("Cluster0", required=False, default=None)
+CHANNEL_ID = int(_env("-1002342989997"))  # private channel where files are uploaded
+ADMIN_IDS = [int(x.strip()) for x in _env("7024087501", required=False, default="").split(",") if x.strip()]  # comma separated ids
 PORT = int(_env("PORT", required=False, default="8080"))
 
 # Optional features
-AUTO_DELETE_MINUTES = int(_env("AUTO_DELETE_MINUTES", required=False, default="0"))  # 0 = disabled
+AUTO_DELETE_MINUTES = int(_env("AUTO_DELETE_MINUTES", required=False, default="600"))  # 0 = disabled
 SEARCH_RESULT_LIMIT = int(_env("SEARCH_RESULT_LIMIT", required=False, default="7"))
 
 # Session expiration seconds (for TTL index)
