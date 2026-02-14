@@ -10,7 +10,7 @@ def _env(key: str, required: bool = True, default: str = None) -> str:
         raise ConfigError(f"Environment variable {key} is required.")
     return val
 
-API_ID = int(_env("27857521"))
+API_ID = int(_env("API_ID"))
 API_HASH = _env("627b314d25c83e2c9a1a99db9ae0a3ef")
 BOT_TOKEN = _env("8317617574:AAGIWs5ZtAQSrrvBBtOZ6fPgE6Ez2NWpBpk")
 DATABASE_URL = _env("mongodb+srv://Profiledata:dhbh5fgnnk8ygvhnj7@cluster0.ahxpzci.mongodb.net/?appName=Cluster0")  # e.g. mongodb+srv://...
