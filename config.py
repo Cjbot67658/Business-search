@@ -14,6 +14,7 @@ API_ID = int(_env("API_ID"))
 API_HASH = _env("API_HASH")
 BOT_TOKEN = _env("BOT_TOKEN")
 DATABASE_URL = _env("DATABASE_URL")  # e.g. mongodb+srv://...
+DATABASE_NAME = _env("DATABASE_NAME", required=False, default=None)
 CHANNEL_ID = int(_env("CHANNEL_ID"))  # private channel where files are uploaded
 ADMIN_IDS = [int(x.strip()) for x in _env("ADMIN_IDS", required=False, default="").split(",") if x.strip()]  # comma separated ids
 PORT = int(_env("PORT", required=False, default="8080"))
