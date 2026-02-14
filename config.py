@@ -6,7 +6,7 @@ class ConfigError(Exception):
 
 def _env(key: str, required: bool = True, default: str = None) -> str:
     val = os.getenv(key, default)
-    if required and (val is None or val == "27857521"):
+    if required and (val is None or val == ""):
         raise ConfigError(f"Environment variable {key} is required.")
     return val
 
